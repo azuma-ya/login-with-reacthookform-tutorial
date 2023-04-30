@@ -5,13 +5,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { validationSchema } from "../../../utils/validationSchema";
 import RhfTextField from "../../ui/textField/RhfTextField";
 import AvatarButtonInput from "../../ui/button/AvatarButtonInput";
-import RhfDatePicker from "../../ui/datepicer/RhfDatePicker";
+import RhfDatePicker from "../../ui/datePicker/RhfDatePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 export type RegisterFormData = {
   username: string;
   email: string;
   password: string;
-  date: any;
+  date: Dayjs | Date;
   avatar?: string;
 };
 
@@ -23,7 +24,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   const [avatarImage, setAvatarImage] = useState("");
 
   const { control, handleSubmit } = useForm<RegisterFormData>({
-    defaultValues: { username: "", email: "", password: "" },
+    defaultValues: { username: "", email: "", password: "", date: dayjs() },
     resolver: zodResolver(validationSchema),
   });
 
@@ -75,7 +76,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
         label="パスワード"
         required
       />
-      <RhfDatePicker />
+      <RhfDatePicker control={control} name="date" label="生年月日" />
       <AvatarButtonInput
         src={avatarImage}
         sx={{ width: "50px", height: "50px" }}

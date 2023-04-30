@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 import { z } from "zod";
 
 export const validationSchema = z.object({
@@ -10,4 +11,8 @@ export const validationSchema = z.object({
   password: z
     .string({ required_error: "パスワードは必須です。" })
     .min(6, "パスワードは６文字以上で入力してください。"),
+  date: z.preprocess(
+    (day) => (day as Dayjs).toDate(),
+    z.date().max(new Date(), { message: "若すぎる!" })
+  ),
 });

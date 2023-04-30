@@ -9,7 +9,13 @@ interface RegisterFormContainerProps {
 }
 
 const RegisterFormContainer = ({ onRegister }: RegisterFormContainerProps) => {
-  const handleRegister = ({ username, email, password }: RegisterFormData) => {
+  const handleRegister = ({
+    username,
+    email,
+    password,
+    date,
+  }: RegisterFormData) => {
+    console.log(date);
     return;
     //firebaseに登録する処理
     createUserWithEmailAndPassword(auth, email, password)
