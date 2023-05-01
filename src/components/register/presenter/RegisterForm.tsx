@@ -6,14 +6,15 @@ import { validationSchema } from "../../../utils/validationSchema";
 import RhfTextField from "../../ui/textField/RhfTextField";
 import AvatarButtonInput from "../../ui/button/AvatarButtonInput";
 import RhfDatePicker from "../../ui/datePicker/RhfDatePicker";
-import dayjs, { Dayjs } from "dayjs";
+import RhfRadioGroup from "../../ui/radio/RhfRadioGroup";
 
 export type RegisterFormData = {
   username: string;
   email: string;
   password: string;
-  date: Dayjs | Date;
+  date: Date;
   avatar?: string;
+  gender: "male" | "female" | "other" | "";
 };
 
 interface RegisterFormProps {
@@ -24,7 +25,13 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   const [avatarImage, setAvatarImage] = useState("");
 
   const { control, handleSubmit } = useForm<RegisterFormData>({
-    defaultValues: { username: "", email: "", password: "", date: dayjs() },
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      date: new Date(),
+      gender: "",
+    },
     resolver: zodResolver(validationSchema),
   });
 
@@ -83,6 +90,16 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
         onChange={(e) =>
           handleImageChange(e as React.ChangeEvent<HTMLInputElement>)
         }
+      />
+      <RhfRadioGroup
+        control={control}
+        name="gender"
+        label="Gender"
+        radios={[
+          { value: "male", label: "male" },
+          { value: "female", label: "female" },
+          { value: "other", label: "other" },
+        ]}
       />
       <Button variant="contained" type="submit">
         送信する
