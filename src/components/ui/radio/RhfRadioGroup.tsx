@@ -5,6 +5,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  RadioGroupProps,
 } from "@mui/material";
 import React from "react";
 import { Controller, FieldValues, UseControllerProps } from "react-hook-form";
@@ -12,12 +13,14 @@ import { Controller, FieldValues, UseControllerProps } from "react-hook-form";
 type radio = {
   value: string;
   label: string;
+  required: boolean;
 };
 
 type RhfRadioGroupProps<T extends FieldValues> = {
   label: string;
   radios: radio[];
-} & UseControllerProps<T>;
+} & RadioGroupProps &
+  UseControllerProps<T>;
 
 const RhfRadioGroup = <T extends FieldValues>(props: RhfRadioGroupProps<T>) => {
   const { name, control, label, radios } = props;
@@ -32,7 +35,7 @@ const RhfRadioGroup = <T extends FieldValues>(props: RhfRadioGroupProps<T>) => {
             {radios.map((radio, index) => (
               <FormControlLabel
                 value={radio.value}
-                control={<Radio />}
+                control={<Radio required={radio.required} />}
                 label={radio.label}
                 key={index}
               />

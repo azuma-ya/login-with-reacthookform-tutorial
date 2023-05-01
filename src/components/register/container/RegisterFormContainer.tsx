@@ -15,6 +15,7 @@ const RegisterFormContainer = ({ onRegister }: RegisterFormContainerProps) => {
     password,
     date,
     gender,
+    terms,
   }: RegisterFormData) => {
     console.log({
       username,
@@ -22,6 +23,7 @@ const RegisterFormContainer = ({ onRegister }: RegisterFormContainerProps) => {
       password,
       date,
       gender,
+      terms,
     });
     return;
     //firebaseに登録する処理

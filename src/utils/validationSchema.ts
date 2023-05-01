@@ -12,4 +12,9 @@ export const validationSchema = z.object({
     .min(6, { message: "パスワードは６文字以上で入力してください。" }),
   date: z.date().max(new Date(), { message: "若すぎる!" }),
   gender: z.string().nonempty({ message: "いずれかを選択してください。" }),
+  terms: z
+    .boolean()
+    .refine((terms) => terms, {
+      message: "利用規約に同意する必要があります。 ",
+    }),
 });
