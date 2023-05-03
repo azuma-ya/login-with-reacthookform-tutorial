@@ -2,7 +2,7 @@ import React from "react";
 import { Stack, Button, Box, Paper } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { validationSchema } from "../../../utils/validationSchema";
+import { registerValidationSchema } from "../../../utils/validationSchema";
 import RhfTextField from "../../ui/textField/RhfTextField";
 import RhfDatePicker from "../../ui/datePicker/RhfDatePicker";
 import RhfRadioGroup from "../../ui/radio/RhfRadioGroup";
@@ -32,7 +32,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
       gender: "",
       terms: false,
     },
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(registerValidationSchema),
   });
 
   const onSubmit: SubmitHandler<RegisterFormData> = (

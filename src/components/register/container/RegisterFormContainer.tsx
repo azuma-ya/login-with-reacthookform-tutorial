@@ -15,26 +15,18 @@ const RegisterFormContainer = ({ onRegister }: RegisterFormContainerProps) => {
     password,
     date,
     gender,
-    terms,
   }: RegisterFormData) => {
-    console.log({
-      username,
-      email,
-      password,
-      date,
-      gender,
-      terms,
-    });
-    return;
     //firebaseに登録する処理
     createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
+      .then((userCredential) => {
         const user = userCredential.user;
         //データベースに詳細を追加
         const userInitialData = {
           email: email,
           uid: user.uid,
           username: username,
+          birthday: date,
+          gender: gender,
         };
         addDoc(collection(db, "users"), userInitialData);
         onRegister();
