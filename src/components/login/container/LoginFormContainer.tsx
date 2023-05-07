@@ -16,7 +16,7 @@ const LoginFormContainer = ({ onLogin }: LoginFormContainerProps) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        dispatch(setUser(user));
+        dispatch(setUser({ ...user, state: "login" }));
         onLogin();
       })
       .catch((error) => {
